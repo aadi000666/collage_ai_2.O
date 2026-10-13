@@ -1,0 +1,217 @@
+[
+  {
+    "name": "mark_attendance",
+    "description": "Mark a student as present or absent on a specific date. Use this when the user wants to record or update attendance for a particular day.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "roll_number": {
+          "type": "string",
+          "description": "Student roll number (e.g. CS2023001)"
+        },
+        "date": {
+          "type": "string",
+          "description": "Date in YYYY-MM-DD format, or 'today' for current date"
+        },
+        "status": {
+          "type": "string",
+          "description": "Attendance status: 'present' or 'absent'",
+          "enum": ["present", "absent"]
+        }
+      },
+      "required": ["roll_number", "date", "status"]
+    }
+  },
+  {
+    "name": "get_attendance",
+    "description": "Get complete attendance report for a student including all dates, days present/absent, percentage, and recent records.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "roll_number": {
+          "type": "string",
+          "description": "Student roll number"
+        }
+      },
+      "required": ["roll_number"]
+    }
+  },
+  {
+    "name": "get_attendance_percentage",
+    "description": "Get the attendance percentage for a student along with advice on whether they need to attend more classes. Use this when user asks about attendance %, or asks if they can skip classes.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "roll_number": {
+          "type": "string",
+          "description": "Student roll number"
+        }
+      },
+      "required": ["roll_number"]
+    }
+  },
+  {
+    "name": "calculate",
+    "description": "Evaluate a mathematical expression. Use for arithmetic, algebra, or any numeric calculation the user asks for.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "type": "string",
+          "description": "Mathematical expression to evaluate (e.g. '(85 + 90 + 78) / 3')"
+        }
+      },
+      "required": ["expression"]
+    }
+  },
+  {
+    "name": "calculate_cgpa",
+    "description": "Calculate CGPA (Cumulative Grade Point Average) from grades and credit hours.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "grades": {
+          "type": "array",
+          "items": {"type": "number"},
+          "description": "List of grade points for each subject (e.g. [9.0, 8.5, 7.0])"
+        },
+        "credits": {
+          "type": "array",
+          "items": {"type": "number"},
+          "description": "List of credit hours for each subject (e.g. [4, 3, 3])"
+        }
+      },
+      "required": ["grades", "credits"]
+    }
+  },
+  {
+    "name": "calculate_percentage",
+    "description": "Calculate percentage from marks obtained and total marks. Also returns grade letter.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "obtained": {
+          "type": "number",
+          "description": "Marks obtained"
+        },
+        "total": {
+          "type": "number",
+          "description": "Total marks"
+        }
+      },
+      "required": ["obtained", "total"]
+    }
+  },
+  {
+    "name": "days_to_reach_attendance",
+    "description": "Calculate how many more consecutive days a student needs to attend to reach a target attendance percentage (default 75%).",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "current_attended": {
+          "type": "integer",
+          "description": "Number of days currently attended"
+        },
+        "current_total": {
+          "type": "integer",
+          "description": "Total working days so far"
+        },
+        "target_pct": {
+          "type": "number",
+          "description": "Target attendance percentage (default 75.0)"
+        }
+      },
+      "required": ["current_attended", "current_total"]
+    }
+  },
+  {
+    "name": "get_current_time",
+    "description": "Get the current date and time.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "days_until",
+    "description": "Calculate how many days until a target date. Useful for exam countdowns, assignment deadlines, or event reminders.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "target_date": {
+          "type": "string",
+          "description": "Target date in YYYY-MM-DD format"
+        }
+      },
+      "required": ["target_date"]
+    }
+  },
+  {
+    "name": "working_days_between",
+    "description": "Count the number of working days (excluding weekends) between two dates. Useful for calculating total class days in a period.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "start_date": {
+          "type": "string",
+          "description": "Start date in YYYY-MM-DD format"
+        },
+        "end_date": {
+          "type": "string",
+          "description": "End date in YYYY-MM-DD format"
+        }
+      },
+      "required": ["start_date", "end_date"]
+    }
+  },
+  {
+    "name": "get_semester_week",
+    "description": "Get which week of the semester we are currently in, given the semester start date.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "semester_start": {
+          "type": "string",
+          "description": "Semester start date in YYYY-MM-DD format"
+        }
+      },
+      "required": ["semester_start"]
+    }
+  },
+  {
+    "name": "list_uploaded_pdfs",
+    "description": "List all PDF files available in the uploads folder.",
+    "parameters": {
+      "type": "object",
+      "properties": {}
+    }
+  },
+  {
+    "name": "extract_text_from_pdf",
+    "description": "Extract and read text content from a PDF file. Use when user asks to read, analyze, or process a PDF document.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Name of the PDF file in uploads/ folder (e.g. 'timetable.pdf')"
+        }
+      },
+      "required": ["filename"]
+    }
+  },
+  {
+    "name": "analyze_pdf_for_attendance",
+    "description": "Analyze a PDF file specifically for attendance data, dates, or schedule information.",
+    "parameters": {
+      "type": "object",
+      "properties": {
+        "filename": {
+          "type": "string",
+          "description": "Name of the PDF file in uploads/ folder"
+        }
+      },
+      "required": ["filename"]
+    }
+  }
+]

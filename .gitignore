@@ -1,0 +1,30 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual Environment
+.venv/
+venv/
+env/
+
+# Environment Variables - NEVER COMMIT THIS
+.env
+.env.local
+
+# IDE
+.vscode/
+.idea/
+
+# Data
+data/*.json
+
+# PDF uploads
+uploads/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
